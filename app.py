@@ -6,7 +6,7 @@ from helper_functions import text_to_df
 
 # Initialize the app
 app = Dash()
-#server = app.server
+server = app.server
 
 # App layout
 app.layout = [
