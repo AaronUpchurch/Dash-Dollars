@@ -1,5 +1,5 @@
 # text to dataframe function
-def text_to_df(text):
+def text_to_df(text,manual=False):
 
     import pandas as pd
     import numpy as np
@@ -15,11 +15,18 @@ def text_to_df(text):
     text = text[start_index:]
 
     # add regex header to first order
-    header = '\nâ€¢ Leave a review'
+    if manual: 
+        header = '\nâ€¢ Leave a review'
+    else: 
+        header = '\• Leave a review'
     text = header + text
 
     # define order regex
-    regex = r'\• Leave a review\n([\w\s\']*)\n([{a-zA-z,1-9\s]*) • \$([1-9\.]*) •'
+    if manual:
+        regex = r'\â€¢ Leave a review\n([\w\s\'\-\&]*)\n([{a-zA-z,1-9\s]*) â€¢ \$([0-9\.]*) â€¢'
+    else:
+        regex = r'\• Leave a review\n([\w\s\'$\-\&]*)\n([{a-zA-z,1-9\s]*) • \$([0-9\.]*) •'
+
     
     # get regex matches
     data = re.findall(regex,text)
