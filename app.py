@@ -48,4 +48,4 @@ def update_output(text):
 
 # Run the app
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run_server(debug=False)
