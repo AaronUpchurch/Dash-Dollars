@@ -8,7 +8,7 @@ def text_to_df(text,manual=False):
 
     # check that correct text has been inputed
     if text[0:21] != 'LeftSideNavigationBar':
-        return pd.DataFrame(columns = ['Resturant','Date','Price','running_total_price'])
+        return pd.DataFrame(columns = ['Resturant','Date','Price','running_total_price','day_of_week'])
 
     # remove header information
     start_index = text.find('Orders\nCompleted') + len('Orders\nCompleted')
@@ -76,5 +76,7 @@ def text_to_df(text,manual=False):
     df.Date = df.apply(make_datetime,axis=1)
 
     df['running_total_price'] = [df.Price[i:].sum() for i in np.arange(0,df.shape[0])]
+
+    df['day_of_week'] = df.Date.apply(lambda x: x.strftime('%A'))
 
     return df
